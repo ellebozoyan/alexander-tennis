@@ -1,0 +1,2001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+<title>Alexander's Tennis</title>
+
+<!-- PWA - Installable app on iPad / iPhone home screen -->
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Tennis" />
+<meta name="theme-color" content="#5d8a3a" />
+<meta name="format-detection" content="telephone=no" />
+
+<!-- App icons (inline SVG, base64-encoded so no separate files needed) -->
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxODAgMTgwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiM3ZmIwNjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMyZDRhMmIiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgcng9IjQwIiByeT0iNDAiIGZpbGw9InVybCgjZykiLz48Y2lyY2xlIGN4PSI5MCIgY3k9IjkwIiByPSI1MCIgZmlsbD0iI2Q0ZGQyYiIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDQwIDE0MCA5MCIgc3Ryb2tlPSIjZmFmNmU5IiBzdHJva2Utd2lkdGg9IjMuNSIgZmlsbD0ibm9uZSIvPjxwYXRoIGQ9Ik00MCA5MCBRIDkwIDE0MCAxNDAgOTAiIHN0cm9rZT0iI2ZhZjZlOSIgc3Ryb2tlLXdpZHRoPSIzLjUiIGZpbGw9Im5vbmUiLz48L3N2Zz4=" />
+<link rel="manifest" href="manifest.json" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #faf6e9;
+    --cream-deep: #f3edd8;
+    --court-green: #5d8a3a;
+    --court-green-dark: #2d4a2b;
+    --tennis-yellow: #d4dd2b;
+    --clay-orange: #d96d3d;
+    --clay-deep: #b85528;
+    --net-white: #ffffff;
+    --line-white: #fdfaf2;
+    --shadow-warm: rgba(45, 74, 43, 0.12);
+    --ink: #2d4a2b;
+    --ink-soft: #4a6446;
+    --highlight: #ffd966;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth; -webkit-text-size-adjust: 100%;}
+  body{
+    font-family:'Plus Jakarta Sans', -apple-system, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+    font-size: 17px;
+    background-image: 
+      radial-gradient(circle at 20% 10%, rgba(212,221,43,0.08), transparent 40%),
+      radial-gradient(circle at 80% 60%, rgba(217,109,61,0.06), transparent 40%);
+    min-height: 100vh;
+    /* iOS safe-area for installed PWA */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  /* Allow text selection in inputs etc */
+  input, textarea {-webkit-user-select: text; user-select: text;}
+
+  /* IN-APP VIDEO PLAYER OVERLAY */
+  #video-overlay{
+    position: fixed;
+    inset: 0;
+    background: #000;
+    z-index: 10000;
+    display: none;
+    flex-direction: column;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  #video-overlay.show{display: flex;}
+  #video-overlay-bar{
+    background: var(--court-green-dark);
+    color: var(--cream);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  #video-overlay-back{
+    background: var(--tennis-yellow);
+    color: var(--court-green-dark);
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  #video-overlay-back:active{transform: scale(0.97);}
+  #video-overlay-title{
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+    margin: 0 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  #video-overlay-frame-wrap{
+    flex: 1;
+    background: #000;
+    position: relative;
+  }
+  #video-overlay-frame{
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  h1,h2,h3,h4{font-family:'Fraunces', Georgia, serif; color: var(--ink); line-height:1.15;}
+  h1{font-size:clamp(2.2rem, 5vw, 3.6rem); font-weight:800; letter-spacing:-0.02em;}
+  h2{font-size:clamp(1.6rem, 3.5vw, 2.4rem); font-weight:700; letter-spacing:-0.015em;}
+  h3{font-size:clamp(1.2rem, 2.5vw, 1.5rem); font-weight:700;}
+  h4{font-size:1.05rem; font-weight:700; color: var(--court-green-dark);}
+  p{margin: 0 0 0.85em 0;}
+  a{color: var(--clay-deep); text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px;}
+  a:hover{color: var(--court-green-dark);}
+
+  /* HEADER */
+  .top-banner{
+    background: linear-gradient(135deg, var(--court-green) 0%, var(--court-green-dark) 100%);
+    color: var(--cream);
+    padding: 2.2rem 1.5rem 2.2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .top-banner::before{
+    content: '';
+    position:absolute; inset:0;
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(255,255,255,0.025) 18px, rgba(255,255,255,0.025) 19px);
+    pointer-events:none;
+  }
+  .top-banner h1{color: var(--cream); font-style: italic;}
+  .top-banner .sub{
+    font-family:'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-top: 0.4rem;
+    opacity: 0.88;
+  }
+  .ball-icon{
+    display:inline-block;
+    width: 1.1em; height: 1.1em;
+    background: var(--tennis-yellow);
+    border-radius: 50%;
+    vertical-align: middle;
+    box-shadow: inset -3px -3px 8px rgba(45,74,43,0.25);
+    position: relative;
+  }
+  .ball-icon::before, .ball-icon::after{
+    content:''; position:absolute;
+    border: 1.5px solid var(--cream);
+    border-radius: 50%;
+    inset: 0;
+    border-color: transparent var(--cream) transparent var(--cream);
+    transform: rotate(-15deg);
+  }
+
+  /* TAB NAV */
+  .tabs{
+    position: sticky;
+    top: 0;
+    background: var(--cream);
+    border-bottom: 2px solid var(--cream-deep);
+    box-shadow: 0 2px 12px var(--shadow-warm);
+    z-index: 100;
+    padding: 0.75rem;
+  }
+  .tab-list{
+    display: flex;
+    gap: 0.4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    padding-bottom: 4px;
+  }
+  .tab-list::-webkit-scrollbar{height:4px}
+  .tab-list::-webkit-scrollbar-thumb{background:var(--court-green);border-radius:2px}
+  .tab-btn{
+    flex: 0 0 auto;
+    background: var(--cream-deep);
+    color: var(--ink);
+    border: 2px solid transparent;
+    padding: 0.65rem 1.1rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    min-height: 44px;
+  }
+  .tab-btn:hover{background: var(--tennis-yellow);}
+  .tab-btn.active{
+    background: var(--court-green-dark);
+    color: var(--tennis-yellow);
+    border-color: var(--court-green-dark);
+  }
+
+  /* MAIN CONTENT */
+  main{max-width: 1200px; margin: 0 auto; padding: 2rem 1.25rem 4rem;}
+  .panel{display:none; animation: fadeIn 0.4s ease;}
+  .panel.active{display:block;}
+  @keyframes fadeIn{
+    from{opacity:0; transform:translateY(8px)}
+    to{opacity:1; transform:translateY(0)}
+  }
+
+  .section-intro{
+    background: var(--cream-deep);
+    border-left: 6px solid var(--clay-orange);
+    padding: 1.4rem 1.6rem;
+    border-radius: 0 14px 14px 0;
+    margin-bottom: 2rem;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+  }
+
+  /* CARDS */
+  .card-grid{
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .card{
+    background: var(--net-white);
+    border: 2px solid var(--cream-deep);
+    border-radius: 18px;
+    padding: 1.4rem;
+    box-shadow: 0 4px 16px var(--shadow-warm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .card:hover{transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow-warm);}
+  .card-icon{
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--tennis-yellow), #b8c425);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 3px 8px rgba(184,196,37,0.4);
+  }
+  .card h3{margin-bottom: 0.5rem;}
+  .card .summary{
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    margin: 0.6rem 0 0.9rem;
+  }
+  .card .video-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--clay-orange);
+    color: var(--cream);
+    padding: 0.5rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .card .video-link:hover{background: var(--clay-deep); color: var(--cream);}
+
+  /* COURT SVG WRAPPER */
+  .court-wrap{
+    background: var(--net-white);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px var(--shadow-warm);
+  }
+  .court-wrap svg{width:100%; height:auto; max-height:420px; display:block;}
+  .court-legend{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin-top: 1.2rem;
+  }
+  .legend-item{
+    background: var(--cream-deep);
+    padding: 0.7rem 0.9rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+  }
+  .legend-item strong{color: var(--court-green-dark); display:block; margin-bottom:0.15rem;}
+
+  /* WEEK CARDS */
+  .quarter{
+    background: var(--cream-deep);
+    border-radius: 18px;
+    padding: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .quarter-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+  }
+  .quarter-tag{
+    background: var(--court-green-dark);
+    color: var(--tennis-yellow);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .week-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 0.7rem;
+  }
+  .week-card{
+    background: var(--net-white);
+    padding: 0.95rem 1.1rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--court-green);
+    transition: transform 0.15s;
+  }
+  .week-card:hover{transform: translateX(3px);}
+  .week-card .wk-num{
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: var(--clay-orange);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .week-card h4{margin: 0.15rem 0 0.4rem;}
+  .week-card p{font-size: 0.9rem; color: var(--ink-soft); margin: 0;}
+
+  /* SOCIAL STORY */
+  .story-book{
+    background: var(--net-white);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 6px 24px var(--shadow-warm);
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .story-page{
+    background: var(--cream-deep);
+    border-radius: 16px;
+    padding: 1.8rem 1.6rem;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+  }
+  .story-page .emoji{
+    font-size: 2.8rem;
+    flex-shrink: 0;
+    background: var(--tennis-yellow);
+    width: 78px; height: 78px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 3px 10px rgba(184,196,37,0.4);
+  }
+  .story-page .text{
+    font-family: 'Fraunces', serif;
+    font-size: 1.25rem;
+    line-height: 1.4;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .story-num{
+    color: var(--clay-orange);
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* RESOURCES */
+  .resource-block{
+    background: var(--net-white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    border: 2px solid var(--cream-deep);
+  }
+  .resource-block h3{
+    color: var(--clay-deep);
+    margin-bottom: 0.5rem;
+  }
+  .resource-block ul{margin: 0.5rem 0 0 1.2rem; padding: 0;}
+  .resource-block li{margin-bottom: 0.5rem;}
+
+  /* HIGHLIGHT BOX */
+  .pull-quote{
+    background: var(--court-green-dark);
+    color: var(--cream);
+    padding: 1.6rem 1.8rem;
+    border-radius: 18px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin: 1.5rem 0;
+    text-align: center;
+  }
+  .pull-quote::before{
+    content: '"';
+    font-size: 3rem;
+    line-height: 0.5;
+    vertical-align: -0.3em;
+    color: var(--tennis-yellow);
+  }
+  .pull-quote::after{
+    content: '"';
+    font-size: 3rem;
+    line-height: 0;
+    vertical-align: -0.5em;
+    color: var(--tennis-yellow);
+  }
+
+  /* Equipment cards */
+  .equip-row{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+  .equip-item{
+    background: var(--cream-deep);
+    border-radius: 14px;
+    padding: 1rem;
+    text-align: center;
+  }
+  .equip-circle{
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 0.5rem;
+    box-shadow: inset -4px -4px 10px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  .equip-circle::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius:50%;
+    border-color: transparent rgba(255,255,255,0.6) transparent rgba(255,255,255,0.6);
+  }
+  .ball-red{background: linear-gradient(135deg, #d44a3a, #a83523);}
+  .ball-orange{background: linear-gradient(135deg, #e08838, #b8651f);}
+  .ball-green{background: linear-gradient(135deg, #7fb069, #4f8a3d);}
+  .ball-yellow{background: linear-gradient(135deg, #d4dd2b, #a8b020);}
+
+  /* FORMAT CARDS */
+  .format-card{
+    background: var(--net-white);
+    border-radius: 22px;
+    padding: 1.6rem;
+    margin-bottom: 1.4rem;
+    box-shadow: 0 6px 20px var(--shadow-warm);
+    border-top: 8px solid;
+  }
+  .format-A{border-top-color: var(--court-green);}
+  .format-B{border-top-color: var(--tennis-yellow);}
+  .format-C{border-top-color: var(--clay-orange);}
+  .format-D{border-top-color: #6b4f8f;}
+  .format-tag{
+    display: inline-block;
+    padding: 0.3rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .tag-A{background: var(--court-green); color: var(--cream);}
+  .tag-B{background: var(--tennis-yellow); color: var(--court-green-dark);}
+  .tag-C{background: var(--clay-orange); color: var(--cream);}
+  .tag-D{background: #6b4f8f; color: var(--cream);}
+  .format-when{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin: 0.3rem 0 1rem;
+  }
+  .format-versions{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  @media (min-width: 720px){
+    .format-versions{grid-template-columns: 1.2fr 1fr;}
+  }
+  .version-block{
+    background: var(--cream-deep);
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem;
+  }
+  .version-block h4{
+    color: var(--court-green-dark);
+    margin-bottom: 0.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .version-block h4 .duration{
+    font-size: 0.78rem;
+    background: var(--court-green-dark);
+    color: var(--tennis-yellow);
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .block-list{list-style: none; padding: 0; margin: 0;}
+  .block-list li{
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed rgba(45,74,43,0.15);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    font-size: 0.93rem;
+  }
+  .block-list li:last-child{border-bottom: none;}
+  .block-list .blk-time{
+    flex-shrink: 0;
+    background: var(--net-white);
+    color: var(--court-green-dark);
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    min-width: 52px;
+    text-align: center;
+  }
+  .block-list .blk-name{font-weight: 600; display: block;}
+  .block-list .blk-desc{color: var(--ink-soft); font-size: 0.86rem; display: block;}
+
+  /* PHASE BANNER */
+  .phase{
+    background: linear-gradient(135deg, var(--court-green-dark) 0%, var(--court-green) 100%);
+    color: var(--cream);
+    padding: 1.4rem 1.6rem;
+    border-radius: 18px;
+    margin: 2rem 0 1.2rem;
+  }
+  .phase h3{color: var(--cream); margin-bottom: 0.3rem;}
+  .phase .phase-meta{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+  .phase-chip{
+    background: rgba(255,255,255,0.18);
+    color: var(--cream);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .phase p{color: rgba(250,246,233,0.92); margin: 0.5rem 0 0;}
+
+  /* WEEK ROW with format colors */
+  .week-row{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(245px, 1fr));
+    gap: 0.7rem;
+    margin-bottom: 1.5rem;
+  }
+  .week-row .week-card{border-left-width: 5px;}
+  .week-card.fmt-A{border-left-color: var(--court-green);}
+  .week-card.fmt-B{border-left-color: var(--tennis-yellow);}
+  .week-card.fmt-C{border-left-color: var(--clay-orange);}
+  .week-card.fmt-D{border-left-color: #6b4f8f;}
+  .fmt-pill{
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 0.12rem 0.5rem;
+    border-radius: 4px;
+    margin-left: 0.45rem;
+    letter-spacing: 0.05em;
+    vertical-align: middle;
+  }
+  .fmt-pill.A{background: var(--court-green); color: var(--cream);}
+  .fmt-pill.B{background: var(--tennis-yellow); color: var(--court-green-dark);}
+  .fmt-pill.C{background: var(--clay-orange); color: var(--cream);}
+  .fmt-pill.D{background: #6b4f8f; color: var(--cream);}
+
+  /* WARM-UP MENU */
+  .warmup-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.7rem;
+  }
+  .warmup-item{
+    background: var(--cream-deep);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--clay-orange);
+  }
+  .warmup-item h4{font-size: 0.95rem; margin-bottom: 0.2rem;}
+  .warmup-item p{font-size: 0.85rem; color: var(--ink-soft); margin: 0;}
+
+  /* INLINE WEEKLY VIDEO LINK */
+  .wk-vid{
+    display: inline-block;
+    margin-top: 0.4rem;
+    color: var(--clay-deep);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: var(--cream-deep);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--clay-orange);
+  }
+  .wk-vid:hover{
+    background: var(--clay-orange);
+    color: var(--cream);
+  }
+
+  /* Card video link for games */
+  .game-vid{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.6rem;
+    background: transparent;
+    color: var(--clay-deep);
+    padding: 0.3rem 0.7rem;
+    border: 1.5px solid var(--clay-orange);
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .game-vid:hover{background: var(--clay-orange); color: var(--cream);}
+
+  /* SONG CARDS */
+  .song-card{
+    background: linear-gradient(135deg, #fffaeb, var(--cream));
+    border: 2px solid var(--cream-deep);
+    position: relative;
+    overflow: hidden;
+  }
+  .song-card::before{
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(212,221,43,0.3), transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .song-card .song-id{
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    font-family: 'Courier New', monospace;
+    margin-top: 0.5rem;
+    opacity: 0.65;
+  }
+  .play-button{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: linear-gradient(135deg, var(--court-green), var(--court-green-dark));
+    color: var(--cream);
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    text-decoration: none;
+    margin-top: 0.8rem;
+    box-shadow: 0 3px 10px rgba(45,74,43,0.25);
+    transition: transform 0.15s;
+  }
+  .play-button:hover{
+    transform: translateY(-2px);
+    color: var(--tennis-yellow);
+    box-shadow: 0 5px 14px rgba(45,74,43,0.35);
+  }
+  .play-button .icon{
+    font-size: 1.05rem;
+    background: var(--tennis-yellow);
+    color: var(--court-green-dark);
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .song-add{
+    background: var(--cream-deep);
+    border: 2.5px dashed var(--court-green);
+    border-radius: 18px;
+    padding: 1.4rem;
+    text-align: center;
+  }
+  .song-add .card-icon{
+    background: linear-gradient(135deg, var(--cream), var(--cream-deep)) !important;
+    color: var(--court-green-dark);
+    border: 2px dashed var(--court-green);
+  }
+  .song-add ol{
+    text-align: left;
+    margin: 0.8rem 0 0 1.2rem;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+  }
+  .song-add ol li{margin-bottom: 0.3rem;}
+
+  .song-uses{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+  .song-use{
+    background: var(--net-white);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    border-left: 3px solid var(--tennis-yellow);
+  }
+  .song-use h4{
+    font-size: 0.95rem;
+    margin-bottom: 0.2rem;
+    color: var(--court-green-dark);
+  }
+  .song-use p{
+    font-size: 0.86rem;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  /* CUE CHIP — for cards (skills, rules, court, games, etc.) */
+  .cue{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--court-green-dark);
+    margin-top: 0.65rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(212, 221, 43, 0.22);
+    border-left: 3px solid var(--tennis-yellow);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.35;
+  }
+  .cue::before{
+    content: '💬';
+    margin-right: 0.4rem;
+    font-style: normal;
+  }
+  /* Tighter cue for legend items and warmup items */
+  .legend-item .cue, .warmup-item .cue{
+    font-size: 0.84rem;
+    margin-top: 0.4rem;
+    padding: 0.3rem 0.6rem;
+  }
+  /* Block cue inside lesson format lists */
+  .blk-cue{
+    display: block;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--clay-deep);
+    margin-top: 0.25rem;
+  }
+  .blk-cue::before{
+    content: '💬 ';
+    font-style: normal;
+  }
+
+  /* Print friendly */
+  @media print{
+    .tabs{display:none}
+    .panel{display:block !important; page-break-after: always;}
+    body{background: white;}
+  }
+
+  @media (max-width: 640px){
+    main{padding: 1.25rem 0.85rem 3rem;}
+    .top-banner{padding: 1.5rem 1rem;}
+    .story-page{flex-direction:column; text-align:center; padding: 1.4rem 1.1rem;}
+    .story-page .text{font-size: 1.1rem;}
+  }
+
+  /* Court SVG specific */
+  .court-svg .court-bg{fill: #5d8a3a;}
+  .court-svg .court-line{stroke: var(--line-white); stroke-width: 3; fill: none;}
+  .court-svg .net{stroke: #2d2d2d; stroke-width: 4;}
+  .court-svg .label{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--cream);
+  }
+  .court-svg .label-dark{
+    fill: var(--court-green-dark);
+    font-weight: 700;
+  }
+  .court-svg .arrow{stroke: var(--clay-deep); stroke-width: 2; fill: none; marker-end: url(#arrowhead);}
+</style>
+</head>
+<body>
+
+<header class="top-banner">
+  <h1>Alexander's Tennis Playbook <span class="ball-icon"></span></h1>
+  <p class="sub">A picture guide to the rules, the court, the strokes, and the joy of the game.</p>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="tab-list" role="tablist">
+    <button class="tab-btn active" data-tab="welcome">🏁 Start Here</button>
+    <button class="tab-btn" data-tab="court">🏟️ The Court</button>
+    <button class="tab-btn" data-tab="rules">📋 Rules</button>
+    <button class="tab-btn" data-tab="skills">🎯 Skills &amp; Strokes</button>
+    <button class="tab-btn" data-tab="program">📅 Lesson Plans</button>
+    <button class="tab-btn" data-tab="games">🎮 Fun Games</button>
+    <button class="tab-btn" data-tab="story">📖 Tennis Story</button>
+    <button class="tab-btn" data-tab="songs">🎵 Tennis Songs</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- WELCOME -->
+<section class="panel active" id="welcome">
+  <div class="section-intro">
+    Welcome, Alexander. You already know how to swing the racquet. You've been practicing with Daddy since you were tiny. Now we're going to learn <em>the whole game</em> — what the lines mean, how to score, the names of every shot. Take your time. Look at the pictures. Watch a video. Try a drill. Tennis is not about being perfect. It's about getting curious, working the process, and finding joy in the rally. And the best part — tennis is a game you can love and play your whole life.
+  </div>
+
+  <h2>What's inside this playbook</h2>
+  <div class="card-grid" style="margin-top:1.2rem">
+    <div class="card">
+      <div class="card-icon">🏟️</div>
+      <h3>The Court</h3>
+      <p class="summary">A picture map of the tennis court with every line named, plus the special "red ball" mini-court that's just your size.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📋</div>
+      <h3>The Rules</h3>
+      <p class="summary">10 simple rules. One picture for each. Watch a short video to see it in action.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Skills &amp; Strokes</h3>
+      <p class="summary">Forehand, backhand, serve, volley, overhead. How to grip, how to swing, how to follow through.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <h3>Lesson Plans</h3>
+      <p class="summary">Four lesson formats that roll in over the year — one at a time. Same predictable shape every time, so what's inside can stay fresh. 30-min and 60-min versions for Daddy and Jordan.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3>Fun Games</h3>
+      <p class="summary">12 silly, challenging, joyful games to play with Daddy or Jordan when practice needs a smile.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📖</div>
+      <h3>Your Tennis Story</h3>
+      <p class="summary">A picture story about going to a tennis lesson — what to expect, what to do, what to feel.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎵</div>
+      <h3>Tennis Songs</h3>
+      <p class="summary">Custom Suno songs made just for you. Listen before practice to get ready, or after a great rally to celebrate. Add new ones anytime.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    The best tennis player is not the one who wins. The best tennis player is the one who keeps showing up, keeps trying, and remembers to smile after a great rally.
+  </div>
+</section>
+
+<!-- COURT -->
+<section class="panel" id="court">
+  <div class="section-intro">
+    Every line on the tennis court has a name and a job. The court is like a map. Once you know the map, the game makes sense.
+  </div>
+
+  <div class="court-wrap">
+    <svg class="court-svg" viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" aria-label="Tennis court diagram">
+      <defs>
+        <marker id="arrowhead" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+          <polygon points="0 0, 8 4, 0 8" fill="#b85528"/>
+        </marker>
+        <pattern id="netPattern" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+          <path d="M 0 4 L 8 4 M 4 0 L 4 8" stroke="#5a5a5a" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <!-- Background outer area -->
+      <rect x="0" y="0" width="800" height="420" fill="#3d6428"/>
+      <!-- Court playing surface: 78x36 ratio. 700 wide x 323 tall (700 * 36/78 ≈ 323) -->
+      <!-- Court positioned: x=50 to x=750 (700 wide), y=48 to y=372 (324 tall) -->
+      <rect x="50" y="48" width="700" height="324" class="court-bg" rx="3"/>
+      <!-- Outer doubles boundary -->
+      <rect x="50" y="48" width="700" height="324" class="court-line"/>
+      <!-- Singles sidelines (top and bottom in this landscape view): doubles alley is 4.5ft / 36ft = 12.5% of width -->
+      <line x1="50" y1="89" x2="750" y2="89" class="court-line"/>
+      <line x1="50" y1="331" x2="750" y2="331" class="court-line"/>
+      <!-- Service lines: 21ft from net out of 39ft from net to baseline -->
+      <!-- Net at center x=400. Distance from net to baseline = 350px. Service line at 21/39 of that = 188.5px -->
+      <line x1="211" y1="89" x2="211" y2="331" class="court-line"/>
+      <line x1="589" y1="89" x2="589" y2="331" class="court-line"/>
+      <!-- Center service line -->
+      <line x1="211" y1="210" x2="589" y2="210" class="court-line"/>
+      <!-- Center marks on baseline -->
+      <line x1="50" y1="207" x2="65" y2="207" class="court-line"/>
+      <line x1="735" y1="207" x2="750" y2="207" class="court-line"/>
+      <!-- Net (vertical, splits court left/right) -->
+      <line x1="400" y1="32" x2="400" y2="388" class="net"/>
+      <line x1="385" y1="32" x2="400" y2="32" class="net"/>
+      <line x1="385" y1="388" x2="400" y2="388" class="net"/>
+      <rect x="392" y="32" width="16" height="356" fill="url(#netPattern)" opacity="0.5"/>
+      <!-- Labels -->
+      <text x="150" y="25" text-anchor="middle" class="label" font-size="13">SIDELINE</text>
+      <text x="650" y="25" text-anchor="middle" class="label" font-size="13">SIDELINE</text>
+      <text x="400" y="20" text-anchor="middle" class="label" font-size="12" font-style="italic">⬅ NET ➡</text>
+      <text x="400" y="408" text-anchor="middle" class="label" font-size="12" font-style="italic">⬅ NET ➡</text>
+      <!-- Service box labels (left side of net) -->
+      <text x="305" y="146" text-anchor="middle" class="label" font-size="12">SERVICE BOX</text>
+      <text x="305" y="160" text-anchor="middle" class="label" font-size="10" font-style="italic">(deuce side)</text>
+      <text x="305" y="275" text-anchor="middle" class="label" font-size="12">SERVICE BOX</text>
+      <text x="305" y="289" text-anchor="middle" class="label" font-size="10" font-style="italic">(ad side)</text>
+      <!-- Service box labels (right side of net) -->
+      <text x="495" y="146" text-anchor="middle" class="label" font-size="12">SERVICE BOX</text>
+      <text x="495" y="160" text-anchor="middle" class="label" font-size="10" font-style="italic">(ad side)</text>
+      <text x="495" y="275" text-anchor="middle" class="label" font-size="12">SERVICE BOX</text>
+      <text x="495" y="289" text-anchor="middle" class="label" font-size="10" font-style="italic">(deuce side)</text>
+      <!-- No man's land labels (between service line and baseline) -->
+      <text x="130" y="220" text-anchor="middle" class="label" font-size="11">NO MAN'S</text>
+      <text x="130" y="234" text-anchor="middle" class="label" font-size="11">LAND</text>
+      <text x="670" y="220" text-anchor="middle" class="label" font-size="11">NO MAN'S</text>
+      <text x="670" y="234" text-anchor="middle" class="label" font-size="11">LAND</text>
+      <!-- Doubles alleys -->
+      <text x="400" y="73" text-anchor="middle" class="label" font-size="10">DOUBLES ALLEY</text>
+      <text x="400" y="355" text-anchor="middle" class="label" font-size="10">DOUBLES ALLEY</text>
+      <!-- Side labels -->
+      <text x="20" y="210" text-anchor="middle" class="label" font-size="11" transform="rotate(-90 20 210)">BASELINE (back line)</text>
+      <text x="780" y="210" text-anchor="middle" class="label" font-size="11" transform="rotate(90 780 210)">BASELINE (back line)</text>
+    </svg>
+  </div>
+
+  <h3 style="margin: 1.2rem 0 0.7rem">The lines and what they mean</h3>
+  <div class="court-legend">
+    <div class="legend-item"><strong>Baseline</strong> The back line. You stand behind it to serve. Hit balls deep to here to push your opponent back.<span class="cue">"I serve from here."</span></div>
+    <div class="legend-item"><strong>Service line</strong> The line in front of the net. Your serve must land between this line and the net.<span class="cue">"Serve must land before this."</span></div>
+    <div class="legend-item"><strong>Center service line</strong> Splits the service area into two boxes — deuce side (right) and ad side (left).<span class="cue">"Splits the boxes."</span></div>
+    <div class="legend-item"><strong>Singles sideline</strong> The inner side line. In singles, balls outside this line are OUT.<span class="cue">"My singles wall."</span></div>
+    <div class="legend-item"><strong>Doubles sideline</strong> The outer side line. In doubles, balls outside this line are OUT.<span class="cue">"My doubles wall."</span></div>
+    <div class="legend-item"><strong>Doubles alley</strong> The strip between the two sidelines. Only used in doubles play.<span class="cue">"Only for doubles."</span></div>
+    <div class="legend-item"><strong>Service boxes</strong> Four boxes near the net. Your serve must bounce inside the diagonal one.<span class="cue">"Where my serve must land."</span></div>
+    <div class="legend-item"><strong>Center mark</strong> The little tick on the baseline. Tells the server where the middle is.<span class="cue">"Middle of the baseline."</span></div>
+    <div class="legend-item"><strong>No man's land</strong> The space between the service line and baseline. Try not to stand here too long during a rally.<span class="cue">"Don't camp here."</span></div>
+    <div class="legend-item"><strong>The net</strong> Center is 3 feet tall (lower for red ball: 2'9"). Touching the net = lose the point.<span class="cue">"Net is lava."</span></div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">Tennis grows with you</h3>
+  <p style="color:var(--ink-soft); margin-bottom:1rem">Tennis has stages. Each stage teaches different things. You start with one color of ball and grow into the next. There is no rush. Every great player started where you are.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#d44a3a,#a83523);color:var(--cream)">🔴</div>
+      <h3>Red Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> how to make friends with the ball, how to swing, how to rally, how the court works. The ball is slow on purpose, so your body has time to learn the moves. This is where every shot becomes <em>yours</em>.</p>
+      <span class="cue">"Make friends with the ball."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#e08838,#b8651f);color:var(--cream)">🟠</div>
+      <h3>Orange Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> how to play real points, how to use the whole court, how to add spin, and how to think one shot ahead. The ball moves a little faster — so now your <em>brain</em> starts playing tennis too.</p>
+      <span class="cue">"Now I think and hit."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#7fb069,#4f8a3d);color:var(--cream)">🟢</div>
+      <h3>Green Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> how to play full matches, how to read your opponent, how to build a point, and how to handle the pressure of close scores. This is where <em>strategy</em> shows up.</p>
+      <span class="cue">"Play smart, not just hard."</span>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:linear-gradient(135deg,#d4dd2b,#a8b020);color:var(--court-green-dark)">🎾</div>
+      <h3>Yellow Stage</h3>
+      <p class="summary"><strong>What you learn here:</strong> the full game, the way pros play. Bigger courts, faster balls, longer matches. By now your strokes, your rules, and your spirit are all yours. You're a tennis player for life.</p>
+      <span class="cue">"My game. My rules. Forever."</span>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 0.7rem">Watch &amp; learn</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Tennis Court Lines Explained</h3>
+      <p class="summary">A 60-second video that walks through every line on the court and what it's called.</p>
+      <a class="video-link" href="https://www.youtube.com/shorts/arJ0DneDAbA" target="_blank" rel="noopener">▶ Watch (60 sec)</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Tennis for Kids: Basic Rules</h3>
+      <p class="summary">Animated kid-friendly explanation of the court and how the game is played.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+  </div>
+</section>
+
+<!-- RULES -->
+<section class="panel" id="rules">
+  <div class="section-intro">
+    Tennis has a few rules and a special way of counting points. Once you know them, every game makes sense. Read one rule. Look at the picture. Watch the video. Then play.
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">👤</div>
+      <h3>1. Who plays</h3>
+      <p class="summary"><strong>Singles:</strong> 1 player vs 1 player. <strong>Doubles:</strong> 2 vs 2. You are on opposite sides of the net.</p>
+      <span class="cue">"One vs. one. Or two vs. two."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪙</div>
+      <h3>2. Who serves first</h3>
+      <p class="summary">Spin a racquet or flip a coin. The winner picks: serve, receive, or which side. The other player gets the leftover choice.</p>
+      <span class="cue">"Spin the racquet."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=TuM5Uh4ii3Q" target="_blank" rel="noopener">▶ How tennis is played</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎾</div>
+      <h3>3. The serve goes diagonal</h3>
+      <p class="summary">Stand behind the baseline. Hit the ball over the net. It MUST bounce in the service box on the OPPOSITE diagonal side.</p>
+      <span class="cue">"Cross the court."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=ogYGv0g3VFA" target="_blank" rel="noopener">▶ Beginner serve guide</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">2️⃣</div>
+      <h3>4. Two chances to serve</h3>
+      <p class="summary">If your first serve misses, you get a second try. If both miss, that's a "double fault" and your opponent wins the point.</p>
+      <span class="cue">"Two tries each turn."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=ogYGv0g3VFA" target="_blank" rel="noopener">▶ Beginner serve guide</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>5. The ball must land in</h3>
+      <p class="summary">If the ball lands inside the lines (or ON the line) it's IN. Outside the line = OUT. The server's lines are just the service box. After the serve, you use the whole court.</p>
+      <span class="cue">"On the line is in."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Rules of tennis</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🟡</div>
+      <h3>6. Bounce once, then hit</h3>
+      <p class="summary">Let the ball bounce ONE time before you hit it (or hit it before it bounces — that's a volley). If it bounces twice, your opponent wins the point.</p>
+      <span class="cue">"One bounce. My turn."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚫</div>
+      <h3>7. Don't touch the net</h3>
+      <p class="summary">If you, your racquet, or your clothes touch the net while the ball is in play, you lose the point.</p>
+      <span class="cue">"Net is lava."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Rules of tennis</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <h3>8. The funny way to count</h3>
+      <p class="summary"><strong>0 = "love" · 1st point = 15 · 2nd = 30 · 3rd = 40 · 4th = game.</strong> You must win by 2. Tied at 40-40 is called "deuce."</p>
+      <span class="cue">"Love. Fifteen. Thirty. Forty. Game."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Scoring explained</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏆</div>
+      <h3>9. Games into sets</h3>
+      <p class="summary">Win 6 games (with a 2-game lead) = win a set. Most matches are best-of-3 sets. Red ball matches are usually shorter — first to 7 points wins.</p>
+      <span class="cue">"Win by two."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Sets &amp; matches</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>10. Be a great sport</h3>
+      <p class="summary">Call your own lines fair. If you're not sure, give it to your opponent. After the match, walk to the net and shake hands. Tennis is a game of respect.</p>
+      <span class="cue">"Shake. Smile. Say good game."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=bct3P9MTyL8" target="_blank" rel="noopener">▶ Pro sportsmanship</a>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    Love, fifteen, thirty, forty, game. The score in tennis is its own little song.
+  </div>
+
+  <h3 style="margin:2rem 0 0.7rem">Watch &amp; learn the rules</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>How Tennis Is Played</h3>
+      <p class="summary">A clear, simple walk-through of the rules for beginners.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=TuM5Uh4ii3Q" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>The Rules of Tennis Explained</h3>
+      <p class="summary">Scoring, terms, and the basics — clearly explained.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>How to Play Tennis for Beginners</h3>
+      <p class="summary">Rules, scoring, serving, and tips — friendly format.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=ogYGv0g3VFA" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="panel" id="skills">
+  <div class="section-intro">
+    Every shot in tennis has a name, a grip, and a swing path. You already know how to "bounce and hit." Now let's name the strokes and learn the secrets.
+  </div>
+
+  <h3 style="margin-bottom:0.8rem">The 5 main strokes</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">➡️</div>
+      <h3>Forehand</h3>
+      <p class="summary">The shot you hit on your strong side (right side if you're right-handed). Grip: <strong>Eastern</strong> — like shaking hands with the racquet.</p>
+      <span class="cue">"Low to high. Finish high."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Forehand video</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">⬅️</div>
+      <h3>Backhand</h3>
+      <p class="summary">The shot on your other side. Most kids start with TWO hands on the racquet for power.</p>
+      <span class="cue">"Turn. Swing. Finish high."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=i1k8MLOsOwI" target="_blank" rel="noopener">▶ 2-hand backhand</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <h3>Serve</h3>
+      <p class="summary">The shot that starts every point. Toss the ball up, hit it down into the service box. Beginners can serve UNDERHAND from the baseline.</p>
+      <span class="cue">"Toss. Reach. Hit."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=ogYGv0g3VFA" target="_blank" rel="noopener">▶ Serving basics</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>Volley</h3>
+      <p class="summary">A shot you hit BEFORE the ball bounces. Used near the net. Short punch, no big swing.</p>
+      <span class="cue">"Block like a wall."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Volley basics</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">⬆️</div>
+      <h3>Overhead (Smash)</h3>
+      <p class="summary">When the ball is high over your head, you reach up and smash it down. Like a serve in mid-rally.</p>
+      <span class="cue">"Point. Then crush."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Overhead intro</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪁</div>
+      <h3>Lob</h3>
+      <p class="summary">A high, soft shot that floats over your opponent's head. Used when they come close to the net.</p>
+      <span class="cue">"Scoop low. Lift HIGH."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=nziQ67EqceI" target="_blank" rel="noopener">▶ Lob basics</a>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">Spin: the secret of every great shot</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🌀</div>
+      <h3>Topspin</h3>
+      <p class="summary">Brush UP on the ball. The ball arcs over the net and dives down into the court. Lets you swing harder while still keeping it in.</p>
+      <span class="cue">"Brush UP."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=RiAdA5PNlp4" target="_blank" rel="noopener">▶ How spin works</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🍂</div>
+      <h3>Slice (Backspin)</h3>
+      <p class="summary">Brush DOWN on the ball. The ball floats and stays low after the bounce. Great for surprising your opponent.</p>
+      <span class="cue">"Brush DOWN."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=2ZpAyZvQ39A" target="_blank" rel="noopener">▶ Slice basics</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">➖</div>
+      <h3>Flat</h3>
+      <p class="summary">No spin. The ball flies straight. Hit through the back of the ball, level. The simplest shot to start with.</p>
+      <span class="cue">"Hit straight through."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Basic forehand</a>
+    </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The grips (how to hold the racquet)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Eastern (Forehand)</h3>
+      <p class="summary">Shake hands with the racquet. Best for beginners. Easy and forgiving.</p>
+      <span class="cue">"Shake hands."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=wKhgN0sFqBI" target="_blank" rel="noopener">▶ Forehand &amp; backhand grips</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🪓</div>
+      <h3>Continental (Hammer)</h3>
+      <p class="summary">Hold the racquet like you're holding a hammer. Used for serves, volleys, and overheads.</p>
+      <span class="cue">"Hold the hammer."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=XPeJDlsJ4cY" target="_blank" rel="noopener">▶ Continental grip</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">✋✋</div>
+      <h3>Two-Handed Backhand</h3>
+      <p class="summary">Bottom hand: continental. Top hand: like a forehand grip. Hands touching, no gap. Most kids' favorite backhand.</p>
+      <span class="cue">"Both hands together."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=i1k8MLOsOwI" target="_blank" rel="noopener">▶ 2-hand backhand</a>
+    </div>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The Ready Position</h3>
+  <div class="card">
+    <p><strong>Before every shot, get ready:</strong></p>
+    <ul style="margin-left:1.2rem; margin-top:0.5rem">
+      <li>Feet wider than shoulders, knees a little bent.</li>
+      <li>Weight on the balls of your feet — like a goalie.</li>
+      <li>Racquet held in front, both hands on it.</li>
+      <li>Eyes WATCHING the ball.</li>
+    </ul>
+    <span class="cue">"Athletic. Eyes up. Ready."</span>
+    <a class="video-link" href="https://www.youtube.com/watch?v=J1UhPl1UrYs" target="_blank" rel="noopener">▶ Ready position &amp; split step</a>
+  </div>
+
+  <h3 style="margin:2rem 0 0.8rem">The Five Steps of Every Shot</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">1️⃣</div>
+      <h3>See it</h3>
+      <p class="summary">Watch the ball off your opponent's racquet. Is it coming to your forehand or backhand?</p>
+      <span class="cue">"Watch the ball."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">2️⃣</div>
+      <h3>Move</h3>
+      <p class="summary">Get your feet to the right spot BEFORE you swing. Small fast steps.</p>
+      <span class="cue">"Feet first."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=lb1pW5nCPtw" target="_blank" rel="noopener">▶ Footwork in 10 min</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">3️⃣</div>
+      <h3>Turn</h3>
+      <p class="summary">Turn your shoulders sideways. Take the racquet back early.</p>
+      <span class="cue">"Shoulders sideways."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Forehand technique</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">4️⃣</div>
+      <h3>Hit</h3>
+      <p class="summary">Swing low to high. Contact ball in front of your body. Watch it leave the strings.</p>
+      <span class="cue">"Contact in front."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=i1k8MLOsOwI" target="_blank" rel="noopener">▶ Stroke contact point</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">5️⃣</div>
+      <h3>Finish</h3>
+      <p class="summary">Follow through over your opposite shoulder. Then go back to ready position.</p>
+      <span class="cue">"Follow through."</span>
+      <a class="video-link" href="https://www.youtube.com/watch?v=y_dMpCs8yTM" target="_blank" rel="noopener">▶ Shadow swing &amp; finish</a>
+    </div>
+  </div>
+</section>
+
+<!-- 52-WEEK PROGRAM -->
+<section class="panel" id="program">
+  <div class="section-intro">
+    The structure stays the same so Alexander can predict what's coming. The content inside the structure changes so it never gets boring. Four lesson formats roll in over the year — one at a time, never all at once. Each format scales to a 60-min lesson with Jordan or a 30-min practice with Daddy.
+  </div>
+
+  <h2 style="margin-bottom:0.4rem">Why formats, not single-skill weeks</h2>
+  <p style="color:var(--ink-soft); margin-bottom: 1.5rem; font-size:1.02rem">Alexander needs predictable structure. He also needs novelty — but novelty inside the structure, not novelty AS the structure. So instead of "this week we do uppies, next week we do dribbles," every practice follows the same shape: warm up → play → new skill → play with skill → drill → clean up. The shape is the constant. What goes inside each block is what evolves.</p>
+  <p style="color:var(--ink-soft); margin-bottom: 1.5rem; font-size:1.02rem">Built-in transitions (water cooler, ball machine adjustments, lights on/off) are <strong>part of the practice</strong>, not interruptions. They reset attention between blocks. Plan for them.</p>
+
+  <h2 style="margin-top:2rem; margin-bottom:0.7rem">The Four Formats</h2>
+  <p style="color:var(--ink-soft);margin-bottom:1.2rem">One format starts. A second is added at week 7. A third at week 27. A fourth at week 40. After each addition, formats <em>rotate</em> — never converge.</p>
+
+  <!-- FORMAT A -->
+  <div class="format-card format-A">
+    <span class="format-tag tag-A">Format A · Discovery</span>
+    <h3>"Look at this. Let's try."</h3>
+    <span class="format-when">Weeks 1–6 (only format used) · Then in rotation through week 52</span>
+    <p>Foundation building. Lots of preview, lots of demo, lots of "let's see what this is." Skills are introduced gently and revisited often. Every concept Alexander needs (court parts, grip, bounce-catch, balance, dribbles, uppies, ready position, drop-and-hit) lives inside this format — woven into the warm-up and the new-skill block instead of taking over the whole session.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Jordan <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">Body wake-up + 2 moves from the warm-up menu (e.g., bounce-catch + dribbles).</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Play</span><span class="blk-desc">Free play with racquet/ball. No goal. No rules. Just fun.</span><span class="blk-cue">"Just play."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">New Skill Preview</span><span class="blk-desc">Watched the video at home? Looked at the picture? Now we name it, demo it, try it slowly.</span><span class="blk-cue">"Watch. Then try."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Play with the New Skill</span><span class="blk-desc">Put it into a game right away. Low-pressure application.</span><span class="blk-cue">"Now use it."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Drill</span><span class="blk-desc">Focused repetition. Jordan feeds. Alexander hits.</span><span class="blk-cue">"Reps build it."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Favorite Game</span><span class="blk-desc">End on a high. Alexander picks from the games list.</span><span class="blk-cue">"End on a high."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Pick up balls, water, exit ritual (handshake, "thank you").</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1 move from the menu.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">6 min</span><div><span class="blk-name">Play</span><span class="blk-desc">Free play. Ball machine welcome.</span><span class="blk-cue">"Just play."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Skill</span><span class="blk-desc">Revisit or preview. Quick.</span><span class="blk-cue">"Watch. Then try."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Play with Skill</span><span class="blk-desc">Apply it in a game.</span><span class="blk-cue">"Now use it."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear. Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT B -->
+  <div class="format-card format-B">
+    <span class="format-tag tag-B">Format B · Rally</span>
+    <h3>"Back and forth. Keep it going."</h3>
+    <span class="format-when">Introduced Week 7 · Alternates with A through week 26</span>
+    <p>Once foundations land, the focus shifts to <em>cooperation across the net</em>. Less new instruction, more sustained back-and-forth. Targets, hoops, cones, counting rallies. Alexander gets to feel like a real tennis player — the ball going over and back, the rhythm of the game.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Jordan <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">2 menu moves (faster reps now). Add shadow swings.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">7 min</span><div><span class="blk-name">Rally Ready</span><span class="blk-desc">Mini bounce-and-hit rally to find the rhythm. No counting yet.</span><span class="blk-cue">"Find the rhythm."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Target Challenge</span><span class="blk-desc">Hoops, cones, or chalk zones on the other side. Hit the target = point.</span><span class="blk-cue">"Aim and hit."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Cooperative Rally</span><span class="blk-desc">Try to beat the team record. "Last week we got to 8. Today let's try 10."</span><span class="blk-cue">"Beat the record."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Mini-Game</span><span class="blk-desc">First to 5 points (or 7). Just for fun, not yet the full scoring system.</span><span class="blk-cue">"First to five."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Cool Down Play</span><span class="blk-desc">Silly low-stakes (T-Shirt Catch, Balloon Tennis, Around the World).</span><span class="blk-cue">"Silly games."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual as Format A.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1–2 menu moves.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Target Practice</span><span class="blk-desc">2 cones or 1 hoop. Aim and hit.</span><span class="blk-cue">"Aim and hit."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Rally Challenge</span><span class="blk-desc">Beat the daily record together.</span><span class="blk-cue">"Beat the record."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT C -->
+  <div class="format-card format-C">
+    <span class="format-tag tag-C">Format C · Match</span>
+    <h3>"Real tennis. Real score."</h3>
+    <span class="format-when">Introduced Week 27 · Rotates with A and B through week 39</span>
+    <p>Now scoring enters the picture. The session feels more like real tennis without losing the playful frame. Alexander practices calling the score, serving sides, and managing the regulation challenge of competition. Built-in "champion moments" guarantee a high note at the end.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Jordan <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">Menu moves + add a few shadow serves and split steps.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Shadow Preview</span><span class="blk-desc">No ball. Walk through "today we're playing first-to-7." Practice calling the score out loud.</span><span class="blk-cue">"Walk it. No ball."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Point Practice</span><span class="blk-desc">Single points, no full games. Coach feeds first ball. Play it out.</span><span class="blk-cue">"One point at a time."</span></div></li>
+          <li><span class="blk-time">15 min</span><div><span class="blk-name">Mini Match</span><span class="blk-desc">First to 4 or 7 points, with score-calling. Take a water break between games.</span><span class="blk-cue">"Real score."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Champion Moment</span><span class="blk-desc">A favorite drill or game from earlier. Always end on a win-feeling.</span><span class="blk-cue">"End on a win."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Cool Down</span><span class="blk-desc">Two laps, light stretches, water.</span><span class="blk-cue">"Lap. Stretch. Water."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up</span><span class="blk-desc">1–2 menu moves.</span><span class="blk-cue">"Wake up the body."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Point Practice</span><span class="blk-desc">Single points. Call the score together.</span><span class="blk-cue">"One point at a time."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Mini Game</span><span class="blk-desc">First to 5. Fast, fun.</span><span class="blk-cue">"Real score."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Lights, water, gear.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMAT D -->
+  <div class="format-card format-D">
+    <span class="format-tag tag-D">Format D · Athlete</span>
+    <h3>"I am a tennis player. This is my game."</h3>
+    <span class="format-when">Introduced Week 40 · Rotates with A, B, and C through week 52</span>
+    <p>Ownership and reflection. Alexander chooses his warm-up moves from the menu. He picks one stroke he wants to refine. He plays a tactical game (hit deep, come to net, etc.). And at the end, he watches a short clip or names one win and one challenge — the metacognitive frame that real athletes build.</p>
+
+    <div class="format-versions">
+      <div class="version-block">
+        <h4>With Jordan <span class="duration">60 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Warm Up — Your Choice</span><span class="blk-desc">Alexander picks 2 moves from the menu. He calls them out.</span><span class="blk-cue">"I pick today."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Technical Tune-Up</span><span class="blk-desc">"What do you want to work on today?" Forehand? Serve? Volley? He chooses.</span><span class="blk-cue">"Make my best better."</span></div></li>
+          <li><span class="blk-time">12 min</span><div><span class="blk-name">Tactical Challenge</span><span class="blk-desc">A game with one specific tactic — "every shot has to land deep" or "sneak to the net."</span><span class="blk-cue">"One rule. One game."</span></div></li>
+          <li><span class="blk-time">15 min</span><div><span class="blk-name">Match Play</span><span class="blk-desc">Full mini-set or 3-game match. Real scoring, real tennis.</span><span class="blk-cue">"Play it real."</span></div></li>
+          <li><span class="blk-time">8 min</span><div><span class="blk-name">Reflect</span><span class="blk-desc">Watch a 30-second clip Jordan filmed. Name one win. Name one challenge for next time.</span><span class="blk-cue">"What did I learn?"</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Clean Up</span><span class="blk-desc">Same exit ritual.</span><span class="blk-cue">"Pack up. Water. Thank you."</span></div></li>
+        </ul>
+      </div>
+      <div class="version-block">
+        <h4>With Daddy <span class="duration">30 min</span></h4>
+        <ul class="block-list">
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Warm Up — Choice</span><span class="blk-desc">Alexander picks his moves.</span><span class="blk-cue">"I pick today."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Tune-Up</span><span class="blk-desc">One stroke he wants to work on.</span><span class="blk-cue">"Make my best better."</span></div></li>
+          <li><span class="blk-time">10 min</span><div><span class="blk-name">Match Play</span><span class="blk-desc">Quick game, real scoring.</span><span class="blk-cue">"Play it real."</span></div></li>
+          <li><span class="blk-time">5 min</span><div><span class="blk-name">Reflect + Clean Up</span><span class="blk-desc">"What was your favorite shot today?"</span><span class="blk-cue">"What did I learn?"</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- WARM UP MENU -->
+  <h2 style="margin-top:2.5rem; margin-bottom:0.6rem">The Warm-Up Menu</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.2rem">These are the foundation moves from the original "weeks 1–6." They never go away. They live in the warm-up of every format, every session — picking 1–3 each time, rotating through. New foundation moves get added; old ones fade and return.</p>
+
+  <div class="warmup-grid">
+    <div class="warmup-item"><h4>🚶 Court Walk</h4><p>Walk every line. Name each one out loud. Sit on the baseline. Stand in a service box.</p><span class="cue">"Name every line."</span><a class="wk-vid" href="https://www.youtube.com/shorts/arJ0DneDAbA" target="_blank" rel="noopener">▶ Court lines (60 sec)</a></div>
+    <div class="warmup-item"><h4>🤸 Body Wake-Up</h4><p>Jumping jacks, butt kicks, side shuffle, arm circles. 30 seconds each.</p><span class="cue">"Wake the body."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=133Fn1x46NU" target="_blank" rel="noopener">▶ Tennis warm-up routine</a></div>
+    <div class="warmup-item"><h4>🤝 Grip Check</h4><p>Find the Eastern (handshake) grip. Then find the Continental (hammer). Switch back and forth.</p><span class="cue">"Find the grip."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=wKhgN0sFqBI" target="_blank" rel="noopener">▶ Tennis grips</a></div>
+    <div class="warmup-item"><h4>🎾 Bounce &amp; Catch</h4><p>Drop ball. One bounce. Catch it. Build to 10 in a row. No racquet.</p><span class="cue">"Drop. Bounce. Catch."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=dSnP1OLLV5k" target="_blank" rel="noopener">▶ Kids ball-handling drills</a></div>
+    <div class="warmup-item"><h4>⚖️ Ball Balance</h4><p>Walk the sideline balancing a red ball on your strings. No hands.</p><span class="cue">"Steady on the strings."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=dSnP1OLLV5k" target="_blank" rel="noopener">▶ Kids ball-handling drills</a></div>
+    <div class="warmup-item"><h4>⬇️ Downward Dribbles</h4><p>Bounce ball on the ground with the racquet, like a basketball. Count to 10.</p><span class="cue">"Bounce like basketball."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=xERca-uM4kE" target="_blank" rel="noopener">▶ 30 beginner drills</a></div>
+    <div class="warmup-item"><h4>⬆️ Uppies</h4><p>Bounce the ball UP off the strings. Count how many in a row.</p><span class="cue">"Tap. Tap. Tap."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=xERca-uM4kE" target="_blank" rel="noopener">▶ 30 beginner drills</a></div>
+    <div class="warmup-item"><h4>🏃 Ready Position</h4><p>Athletic stance. Move side to side. Quick split step on a clap.</p><span class="cue">"Athletic. Eyes up."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=J1UhPl1UrYs" target="_blank" rel="noopener">▶ Master the split step</a></div>
+    <div class="warmup-item"><h4>🪞 Shadow Swings</h4><p>No ball. Practice the forehand and backhand swing in slow motion. Then full speed.</p><span class="cue">"Air swings."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=y_dMpCs8yTM" target="_blank" rel="noopener">▶ Shadow swing with mirror</a></div>
+    <div class="warmup-item"><h4>↔️ Footwork Steps</h4><p>Side shuffle to the sideline and back. Pivot. Recovery steps to the middle.</p><span class="cue">"Quick feet."</span><a class="wk-vid" href="https://www.youtube.com/watch?v=lb1pW5nCPtw" target="_blank" rel="noopener">▶ Footwork in 10 min</a></div>
+  </div>
+
+  <!-- THE ROTATION CALENDAR -->
+  <h2 style="margin-top:2.5rem; margin-bottom:0.6rem">The 52-Week Rotation</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.2rem">Each week shows the format used and the new content focus inside it. Skills can rotate, fade, return, or be skipped. Life happens — there is no falling behind.</p>
+
+  <!-- PHASE 1 -->
+  <div class="phase">
+    <h3>Phase 1 · Establishing the Rhythm</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 1–6</span>
+      <span class="phase-chip">Format A only</span>
+      <span class="phase-chip">Same shape every time</span>
+    </div>
+    <p>Six weeks of the exact same lesson shape. Every block in the same order. The content inside the warm-up and the new-skill block rotates through the foundation moves so Alexander gets familiar with all of them — but the structure never moves. This is when the format becomes <em>predictable</em>. After six weeks, he knows it.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-A"><span class="wk-num">Week 1<span class="fmt-pill A">A</span></span><h4>Discover the Court</h4><p><em>Warm-up:</em> body wake-up + court walk. <em>New skill:</em> name every line. <em>Play:</em> walk-and-toss across the net.</p><a class="wk-vid" href="https://www.youtube.com/shorts/arJ0DneDAbA" target="_blank" rel="noopener">▶ Court lines (60 sec)</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 2<span class="fmt-pill A">A</span></span><h4>Discover the Racquet</h4><p><em>Warm-up:</em> court walk + grip check. <em>New skill:</em> Eastern grip + ball balance. <em>Play:</em> ball balance walk-the-sideline races.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=wKhgN0sFqBI" target="_blank" rel="noopener">▶ Tennis grips</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 3<span class="fmt-pill A">A</span></span><h4>Discover the Bounce</h4><p><em>Warm-up:</em> grip check + ready position. <em>New skill:</em> bounce-and-catch (no racquet). <em>Play:</em> partner toss-and-catch with one bounce.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=dSnP1OLLV5k" target="_blank" rel="noopener">▶ Kids ball-handling drills</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 4<span class="fmt-pill A">A</span></span><h4>Discover the Strings</h4><p><em>Warm-up:</em> bounce-and-catch + ball balance. <em>New skill:</em> downward dribbles. <em>Play:</em> dribble race to the cone.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=xERca-uM4kE" target="_blank" rel="noopener">▶ 30 beginner drills</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 5<span class="fmt-pill A">A</span></span><h4>Discover the Lift</h4><p><em>Warm-up:</em> dribbles + ready position. <em>New skill:</em> uppies. <em>Play:</em> "how many uppies in a row?" challenge.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=xERca-uM4kE" target="_blank" rel="noopener">▶ 30 beginner drills</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 6<span class="fmt-pill A">A</span></span><h4>Discover the Hit</h4><p><em>Warm-up:</em> uppies + shadow swings. <em>New skill:</em> drop and hit forehand. <em>Play:</em> drop-hit into a hoop.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Beginner forehand</a></div>
+  </div>
+
+  <!-- PHASE 2 -->
+  <div class="phase">
+    <h3>Phase 2 · Adding the Rally</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 7–26</span>
+      <span class="phase-chip">A &amp; B alternating</span>
+      <span class="phase-chip">First format change</span>
+    </div>
+    <p>Format B joins. The two formats alternate every other week — A, then B, then A, then B. Format A keeps introducing new technical pieces (volleys, serves, more strokes); Format B applies them in cooperative rally play. Watch for Alexander noticing the new format. Talk about it. Use the visual schedule to preview the difference.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-A"><span class="wk-num">Week 7<span class="fmt-pill A">A</span></span><h4>Drop &amp; Hit Backhand</h4><p>New skill: two-handed backhand. Play: backhand drop-hits into a hoop.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=i1k8MLOsOwI" target="_blank" rel="noopener">▶ 2-hand backhand</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 8<span class="fmt-pill B">B</span></span><h4>First Mini-Rally</h4><p>Cooperative rally inside the service boxes. Goal: 3 in a row.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 9<span class="fmt-pill A">A</span></span><h4>Forehand Cross-Court</h4><p>New skill: hit diagonally to the far service box.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=UwIPqGkQO80" target="_blank" rel="noopener">▶ Cross-court drill</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 10<span class="fmt-pill B">B</span></span><h4>Cross-Court Rally</h4><p>Cooperative cross-court rally. Beat the record.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=UwIPqGkQO80" target="_blank" rel="noopener">▶ Cross-court drill</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 11<span class="fmt-pill A">A</span></span><h4>Backhand Cross-Court</h4><p>New skill: same diagonal pattern, backhand side.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=xJSVAAZn-IM" target="_blank" rel="noopener">▶ Cross-court backhand</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 12<span class="fmt-pill B">B</span></span><h4>Both-Sides Rally</h4><p>Switch sides between rallies. Forehand-then-backhand cooperation.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Forehand technique</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 13<span class="fmt-pill A">A</span></span><h4>Down the Line</h4><p>New skill: hit straight back to the same side.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=Pm4tI3vq3hM" target="_blank" rel="noopener">▶ Down-the-line drill</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 14<span class="fmt-pill B">B</span></span><h4>Direction Game</h4><p>Daddy calls "cross!" or "line!" — Alexander hits accordingly.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=Pm4tI3vq3hM" target="_blank" rel="noopener">▶ Down-the-line drill</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 15<span class="fmt-pill A">A</span></span><h4>The Volley</h4><p>New skill: forehand volley. Block soft tosses.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 16<span class="fmt-pill B">B</span></span><h4>Volley-Volley</h4><p>Both at the net. Volley back and forth, no bouncing.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 17<span class="fmt-pill A">A</span></span><h4>Backhand Volley</h4><p>New skill: backhand side volley.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 18<span class="fmt-pill B">B</span></span><h4>Approach &amp; Volley</h4><p>Hit a forehand, walk to the net, volley.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 19<span class="fmt-pill A">A</span></span><h4>Underhand Serve</h4><p>New skill: scoop the ball into the service box from the baseline.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=FKtqaKjZVPs" target="_blank" rel="noopener">▶ Beginner serve</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 20<span class="fmt-pill B">B</span></span><h4>Service Targets</h4><p>Cone in the box. Serve at the cone.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=FKtqaKjZVPs" target="_blank" rel="noopener">▶ Beginner serve</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 21<span class="fmt-pill A">A</span></span><h4>Footwork &amp; Recovery</h4><p>New skill: split step, pivot, return to center.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=J1UhPl1UrYs" target="_blank" rel="noopener">▶ Master the split step</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 22<span class="fmt-pill B">B</span></span><h4>5-Shot Rally</h4><p>Goal: 5 in a row. Then 7. Then 10.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 23<span class="fmt-pill A">A</span></span><h4>Forehand Consistency</h4><p>Revisit. Smooth, controlled, 10 in a row.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Forehand technique</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 24<span class="fmt-pill B">B</span></span><h4>Beat the Team Record</h4><p>Cooperative rally. Aim higher than last week.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 25<span class="fmt-pill A">A</span></span><h4>Stroke Review</h4><p>New skill: choose a favorite stroke and refine it.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=kbmsyOGR6Cc" target="_blank" rel="noopener">▶ Forehand technique</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 26<span class="fmt-pill B">B</span></span><h4>Summer Showdown</h4><p>First mini-game. First to 5 wins. Just for fun.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+  </div>
+
+  <!-- PHASE 3 -->
+  <div class="phase">
+    <h3>Phase 3 · Adding Match Play</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 27–39</span>
+      <span class="phase-chip">A, B &amp; C rotating</span>
+      <span class="phase-chip">Real scoring arrives</span>
+    </div>
+    <p>Format C enters. Now three formats rotate (A → B → C → A → B → C…). Format C is where scoring becomes real. Format A keeps introducing new shots (overhead, lob, drop shot). Format B keeps the rally muscle. Format C is where Alexander practices the regulation challenge of competitive play with built-in safety: champion moments, water breaks, predictable structure.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-C"><span class="wk-num">Week 27<span class="fmt-pill C">C</span></span><h4>Learn the Score</h4><p>Format C debuts. Practice calling: love, 15, 30, 40, game. Single points only.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Tennis scoring</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 28<span class="fmt-pill A">A</span></span><h4>Service Rules &amp; Sides</h4><p>New skill: deuce side vs. ad side. Two serve attempts.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=ogYGv0g3VFA" target="_blank" rel="noopener">▶ Beginner serve guide</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 29<span class="fmt-pill B">B</span></span><h4>Service Target Rally</h4><p>Underhand serve, then rally inside the boxes.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=FKtqaKjZVPs" target="_blank" rel="noopener">▶ Beginner serve</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 30<span class="fmt-pill C">C</span></span><h4>First Real Game</h4><p>Mini match: first to 4 points (with 2-point lead). Calling the score throughout.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Rules of tennis</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 31<span class="fmt-pill A">A</span></span><h4>The Overhead</h4><p>New skill: smash high balls. "Point at it, then crush it."</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Overhead intro</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 32<span class="fmt-pill B">B</span></span><h4>Lob &amp; Smash Game</h4><p>One person lobs, the other smashes. Switch.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=nziQ67EqceI" target="_blank" rel="noopener">▶ Lob basics</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 33<span class="fmt-pill C">C</span></span><h4>First-to-7</h4><p>Mini set: first to 7 points wins. Win by 2.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Tennis scoring</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 34<span class="fmt-pill A">A</span></span><h4>The Lob</h4><p>New skill: scoop low, lift HIGH. Floats over the net.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=nziQ67EqceI" target="_blank" rel="noopener">▶ Lob basics</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 35<span class="fmt-pill B">B</span></span><h4>Drop Shot Surprise</h4><p>Soft touch shots that barely clear the net. Trickery!</p><a class="wk-vid" href="https://www.youtube.com/watch?v=HUAdy9xs0TQ" target="_blank" rel="noopener">▶ Drop shot technique</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 36<span class="fmt-pill C">C</span></span><h4>Mini Set Match</h4><p>First to 4 games (each game is first-to-4 points).</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Sets &amp; matches</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 37<span class="fmt-pill A">A</span></span><h4>What is Spin?</h4><p>New skill: brush UP for topspin, brush DOWN for slice.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=RiAdA5PNlp4" target="_blank" rel="noopener">▶ How spin works</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 38<span class="fmt-pill B">B</span></span><h4>Topspin Rally</h4><p>Use the new spin in cooperative rallies. Watch the ball arc.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=RiAdA5PNlp4" target="_blank" rel="noopener">▶ How spin works</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 39<span class="fmt-pill C">C</span></span><h4>Fall Festival Match</h4><p>Best of 3 mini-sets. Champion moment ending. Trophy treat.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Tennis match rules</a></div>
+  </div>
+
+  <!-- PHASE 4 -->
+  <div class="phase">
+    <h3>Phase 4 · Becoming a Tennis Player</h3>
+    <div class="phase-meta">
+      <span class="phase-chip">Weeks 40–52</span>
+      <span class="phase-chip">A, B, C &amp; D rotating</span>
+      <span class="phase-chip">Ownership emerges</span>
+    </div>
+    <p>Format D enters. All four rotate (A → B → C → D → A → B → C → D…). Format D is where Alexander becomes the author. He picks his warm-up. He picks the stroke to refine. He reflects at the end. The other formats keep doing what they do — but now there's a session every fourth week where he's running the show.</p>
+  </div>
+  <div class="week-row">
+    <div class="week-card fmt-D"><span class="wk-num">Week 40<span class="fmt-pill D">D</span></span><h4>I Choose My Warm-Up</h4><p>Format D debuts. Alexander picks 2 menu moves. Picks one stroke to refine.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=133Fn1x46NU" target="_blank" rel="noopener">▶ Tennis warm-up routine</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 41<span class="fmt-pill A">A</span></span><h4>Overhand Serve</h4><p>New skill: real serve motion. Toss, reach, snap.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=QGF-v3beNxk" target="_blank" rel="noopener">▶ Overhand serve for kids</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 42<span class="fmt-pill B">B</span></span><h4>Serve &amp; Return Rally</h4><p>Serve underhand, return cross-court, rally out.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=FKtqaKjZVPs" target="_blank" rel="noopener">▶ Beginner serve</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 43<span class="fmt-pill C">C</span></span><h4>Match with Overhand Serve</h4><p>Mini match using the new serve. Permission to fall back to underhand.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=QGF-v3beNxk" target="_blank" rel="noopener">▶ Overhand serve for kids</a></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 44<span class="fmt-pill D">D</span></span><h4>Tactic: Hit Deep</h4><p>Game with one rule: every shot must land past the service line.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 45<span class="fmt-pill A">A</span></span><h4>Doubles Intro</h4><p>New skill: 2 vs 2. Alleys are now IN. Where to stand.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=dhKCJvnMqj4" target="_blank" rel="noopener">▶ Doubles basics</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 46<span class="fmt-pill B">B</span></span><h4>Doubles Rally</h4><p>Cooperative 4-person rally. Communicate with your partner.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=dhKCJvnMqj4" target="_blank" rel="noopener">▶ Doubles basics</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 47<span class="fmt-pill C">C</span></span><h4>Doubles Match</h4><p>Family doubles. Mom or Phoebe joins. First to 5 games.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=dhKCJvnMqj4" target="_blank" rel="noopener">▶ Doubles basics</a></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 48<span class="fmt-pill D">D</span></span><h4>Tactic: Come to the Net</h4><p>Game with one rule: after a strong shot, sneak forward.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Net play basics</a></div>
+    <div class="week-card fmt-A"><span class="wk-num">Week 49<span class="fmt-pill A">A</span></span><h4>Tennis Etiquette</h4><p>New skill: calling lines, "good shot," handshake, "thank you."</p><a class="wk-vid" href="https://www.youtube.com/watch?v=bct3P9MTyL8" target="_blank" rel="noopener">▶ Pro sportsmanship</a></div>
+    <div class="week-card fmt-B"><span class="wk-num">Week 50<span class="fmt-pill B">B</span></span><h4>Read Your Opponent</h4><p>Game: predict where the ball is going before it's hit.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a></div>
+    <div class="week-card fmt-C"><span class="wk-num">Week 51<span class="fmt-pill C">C</span></span><h4>Match with Jordan</h4><p>Real lesson-match. Show him everything you've learned.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=jrhM3k84YJU" target="_blank" rel="noopener">▶ Tennis match rules</a></div>
+    <div class="week-card fmt-D"><span class="wk-num">Week 52<span class="fmt-pill D">D</span></span><h4>Tennis Birthday</h4><p>Year-end. Reflect: 3 favorite moments. Set a goal for Year 2. Celebrate.</p><a class="wk-vid" href="https://www.youtube.com/watch?v=bct3P9MTyL8" target="_blank" rel="noopener">▶ Pro sportsmanship</a></div>
+  </div>
+
+  <div class="pull-quote">
+    The format is the frame. The content is the painting. The frame stays steady so the painting can be bold.
+  </div>
+</section>
+
+<!-- GAMES -->
+<section class="panel" id="games">
+  <div class="section-intro">
+    Drills get the body strong. Games get the spirit strong. Mix them in every practice — especially when energy is dipping or things feel hard. These all use red balls and the smaller court. Some are great for two players. Others are perfect for when Nicolas joins.
+  </div>
+
+  <div class="card-grid">
+    <div class="card" style="border-color: var(--clay-orange); background: linear-gradient(135deg, #fef7e6, var(--cream-deep));">
+      <div class="card-icon" style="background: linear-gradient(135deg, #ff9f3d, var(--clay-orange))">🍎</div>
+      <h3>Fruit Salad <span style="font-size:0.75rem; background:var(--clay-orange); color:var(--cream); padding:0.15rem 0.5rem; border-radius:999px; font-weight:700; vertical-align:middle; margin-left:0.4rem">NICOLAS' FAVORITE</span></h3>
+      <p class="summary">Each player picks a fruit (banana, apple, grape, orange). Stand at cones near the net. Daddy calls out a fruit and tosses a ball — that fruit's player runs in and hits a volley. When Daddy yells "FRUIT SALAD!" — everyone drops their racquets and races to the back fence and back to their cone! Last one back does a silly dance. First one back picks the next fruit.</p>
+      <p style="font-size:0.88rem; color:var(--ink-soft); margin-top:0.6rem"><strong>Why it's perfect for the brothers:</strong> built-in regulation breaks (the running interludes), social and silly, predictable structure with novelty, and a sibling can lead "the call" — Nicolas calling, Alexander hitting, then switch.</p>
+      <span class="cue">"Pick a fruit. Run when called."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=hQHbdH-rEm0" target="_blank" rel="noopener">▶ Watch a Fruit Salad demo</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🐊</div>
+      <h3>Hungry Crocodile</h3>
+      <p class="summary">Daddy calls "Alexander!" and feeds a volley. Miss = lose a limb. First arm goes (hit lefty), then a leg (hop), then both legs (kneel). Last to survive wins. Hilarious.</p>
+      <span class="cue">"Don't get eaten."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=EXUyqSlgWhE" target="_blank" rel="noopener">▶ 3 fun kids tennis drills</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🥄</div>
+      <h3>Egg &amp; Spoon Race</h3>
+      <p class="summary">Balance a tennis ball on the racquet face like a spoon. Walk from baseline to net without dropping it. Race Daddy.</p>
+      <span class="cue">"Don't drop the egg."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=dSnP1OLLV5k" target="_blank" rel="noopener">▶ Ball balance drill</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">⭕</div>
+      <h3>Hula Hoop Targets</h3>
+      <p class="summary">Place 3 hoops on the other side. Each hoop = 1 point. Land your shot in a hoop and score.</p>
+      <span class="cue">"Aim for the hoop."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=osArBTj4Mf8" target="_blank" rel="noopener">▶ Fun kids tennis drills</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎲</div>
+      <h3>Dice Rally</h3>
+      <p class="summary">Roll a die. Whatever number comes up = how many shots you have to keep in a rally. Roll a 5? Get to 5.</p>
+      <span class="cue">"Roll. Then rally."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Tennis basics for kids</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">👕</div>
+      <h3>T-Shirt Catch</h3>
+      <p class="summary">Wear a big t-shirt over your clothes. Daddy hits soft balls. You catch them in your shirt like a basket. Great for tracking the ball.</p>
+      <span class="cue">"Catch it in the shirt."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=osArBTj4Mf8" target="_blank" rel="noopener">▶ Fun kids tennis drills</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏰</div>
+      <h3>Knock the Castle Down</h3>
+      <p class="summary">Stack tennis ball cans on the other side. Each one you knock down = 1 point. Aim, hit, cheer.</p>
+      <span class="cue">"Aim. Hit. Knock down."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=EXUyqSlgWhE" target="_blank" rel="noopener">▶ Target practice for kids</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🚦</div>
+      <h3>Red Light, Green Light Tennis</h3>
+      <p class="summary">Daddy says "green light" — you rally normally. "Red light" — both freeze with racquets up. "Yellow light" — slow motion.</p>
+      <span class="cue">"Freeze on red."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=osArBTj4Mf8" target="_blank" rel="noopener">▶ Quick-direction drills</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <h3>Cone Pyramid</h3>
+      <p class="summary">5 cones on opposite side, far away from each other. Each cone you hit with a forehand = 1 point. First to all 5 wins.</p>
+      <span class="cue">"Hit every cone."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=EXUyqSlgWhE" target="_blank" rel="noopener">▶ Cone target drills</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏃</div>
+      <h3>King of the Court</h3>
+      <p class="summary">One side is "the throne" (winner). One side is "the challenger." Win a point — stay on the throne. Lose — switch sides.</p>
+      <span class="cue">"Win to stay."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=gMnZzn-EtV8" target="_blank" rel="noopener">▶ King of the Court</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>Cooperative Rally Record</h3>
+      <p class="summary">Not a competition. You and Daddy try to break your OWN record for longest rally. Started at 5? Beat it. Then 10. Then 20.</p>
+      <span class="cue">"Beat our record."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=KCaxZaIZYs8" target="_blank" rel="noopener">▶ Beginner rally basics</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔢</div>
+      <h3>Around the World</h3>
+      <p class="summary">After every shot, run around to the OTHER side of the net. Daddy does too. Keep rallying. Total chaos. Total fun.</p>
+      <span class="cue">"Hit, then run."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=Ns0EOvtGrCw" target="_blank" rel="noopener">▶ Around the world drill</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎈</div>
+      <h3>Balloon Tennis (Indoor)</h3>
+      <p class="summary">Rainy day? Use a balloon instead of a ball. Plays slower so you can practice big strokes. Tape a "net" between two chairs.</p>
+      <span class="cue">"Slow ball. Big swings."</span>
+      <a class="game-vid" href="https://www.youtube.com/watch?v=bdGzPvXxjfk" target="_blank" rel="noopener">▶ Indoor tennis games</a>
+    </div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">Watch fun tennis games in action</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>3 Fun Tennis Games for Kids</h3>
+      <p class="summary">A 5-minute video showing three warm-up games kids love. Perfect for previewing with Alexander before practice.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=bdGzPvXxjfk" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎬</div>
+      <h3>Fruit Salad Demo (PE Version)</h3>
+      <p class="summary">Originally a PE game, this video shows the basic structure that Daddy can adapt for the tennis court.</p>
+      <a class="video-link" href="https://www.youtube.com/watch?v=hQHbdH-rEm0" target="_blank" rel="noopener">▶ Watch</a>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem; background:var(--cream-deep)">
+    <h3>Make any drill more fun</h3>
+    <ul style="margin-left:1.2rem; margin-top:0.5rem">
+      <li><strong>Add a story.</strong> "The forehand is a lion's roar — low to high, big finish."</li>
+      <li><strong>Add silly cues.</strong> "Pet the dog, then catch the bird." (Low racquet, then high finish.)</li>
+      <li><strong>Add a target.</strong> A cone, a hoop, a chalk square. Aim is more fun than just hitting.</li>
+      <li><strong>Add a count-out-loud.</strong> "1!... 2!... 3!" Builds rhythm. Builds confidence.</li>
+      <li><strong>Add a victory move.</strong> Fist pump, dance, secret handshake after every great shot.</li>
+      <li><strong>Add music.</strong> Bring a speaker. Pick the songs. Tennis to a beat.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOCIAL STORY -->
+<section class="panel" id="story">
+  <div class="section-intro">
+    A picture story about a tennis lesson. Read it with Mom or Dad before practice. Read it again whenever you want. The pictures show what to expect. The words show what to do.
+  </div>
+
+  <div class="story-book">
+    <div style="text-align:center; margin-bottom:1.5rem">
+      <h2 style="color:var(--clay-deep)">Alexander Goes to Tennis</h2>
+      <p style="font-style:italic; color:var(--ink-soft)">A story about my lesson</p>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎾</div>
+      <div class="text"><span class="story-num">PAGE 1</span>My name is Alexander. I am a tennis player.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">📅</div>
+      <div class="text"><span class="story-num">PAGE 2</span>Today is my tennis lesson. I will play with Jordan, my coach.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎒</div>
+      <div class="text"><span class="story-num">PAGE 3</span>I pack my bag. Racquet. Water bottle. Snack. I am ready.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🚗</div>
+      <div class="text"><span class="story-num">PAGE 4</span>We drive to the tennis court. I look out the window.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">👋</div>
+      <div class="text"><span class="story-num">PAGE 5</span>I see Jordan. He says "Hi Alexander!" I can say hi back, or wave, or smile.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤸</div>
+      <div class="text"><span class="story-num">PAGE 6</span>First we warm up. We jog. We stretch. My body wakes up.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🏃</div>
+      <div class="text"><span class="story-num">PAGE 7</span>Then we do drills. Jordan feeds me balls. I hit them.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">💪</div>
+      <div class="text"><span class="story-num">PAGE 8</span>Sometimes I hit it great. I feel proud.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤔</div>
+      <div class="text"><span class="story-num">PAGE 9</span>Sometimes I miss. That is OK. Even pros miss balls. Missing means I am learning.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">😮‍💨</div>
+      <div class="text"><span class="story-num">PAGE 10</span>If I feel frustrated, I can take a deep breath. I can ask for a water break. That is allowed.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎯</div>
+      <div class="text"><span class="story-num">PAGE 11</span>Jordan helps me. He gives me a tip. I try again.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🎮</div>
+      <div class="text"><span class="story-num">PAGE 12</span>At the end, we play a fun game. I love this part.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🤝</div>
+      <div class="text"><span class="story-num">PAGE 13</span>When the lesson is done, I shake Jordan's hand. I say "Thank you Jordan!"</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">⭐</div>
+      <div class="text"><span class="story-num">PAGE 14</span>I tell Mom or Dad one thing I liked. One thing I learned. One thing that was hard.</div>
+    </div>
+
+    <div class="story-page">
+      <div class="emoji">🌟</div>
+      <div class="text"><span class="story-num">PAGE 15</span>Tennis makes me strong. Tennis makes me focused. Tennis makes me happy. I am a tennis player.</div>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    Missing the ball is part of the game. Learning is part of the game. Showing up is part of the game. You belong on the court.
+  </div>
+</section>
+
+<!-- TENNIS SONGS -->
+<section class="panel" id="songs">
+  <div class="section-intro">
+    Music is part of the practice. Songs help Alexander preview what's coming, regulate his body between blocks, and celebrate the joy of a good rally. Each song below was made just for him on Suno. Tap to play. Add new ones any time.
+  </div>
+
+  <h2 style="margin-bottom:0.4rem">Alexander's Tennis Playlist</h2>
+  <p style="color:var(--ink-soft); margin-bottom:1.5rem">Tap any song to listen. Use them before practice, between blocks, or after a great point.</p>
+
+  <div class="card-grid">
+    <div class="card song-card">
+      <div class="card-icon" style="background:linear-gradient(135deg, #ffd966, var(--clay-orange))">🎵</div>
+      <h3>Who is Jordan — Original</h3>
+      <p class="summary">A custom Suno song for Alexander's tennis journey. Pair it with a moment in the format that matters most — warm-up, transitions, or champion-moment celebration.</p>
+      <a class="play-button" href="https://suno.com/s/ISd79tJqI87Hpcn3" target="_blank" rel="noopener"><span class="icon">▶</span> Play on Suno</a>
+      <p class="song-id">ID: ISd79tJqI87Hpcn3</p>
+    </div>
+    <div class="card song-card">
+      <div class="card-icon" style="background:linear-gradient(135deg, #ffd966, var(--clay-orange))">🎶</div>
+      <h3>Alexander is the Baseline King</h3>
+      <p class="summary">A custom Suno song for Alexander's tennis journey. Pair it with a moment in the format that matters most — warm-up, transitions, or champion-moment celebration.</p>
+      <a class="play-button" href="https://suno.com/s/72fRfHmtyA4K6rW2" target="_blank" rel="noopener"><span class="icon">▶</span> Play on Suno</a>
+      <p class="song-id">ID: 72fRfHmtyA4K6rW2</p>
+    </div>
+    <div class="card song-card">
+      <div class="card-icon" style="background:linear-gradient(135deg, #ffd966, var(--clay-orange))">🎼</div>
+      <h3>Who is Jordan — Remix</h3>
+      <p class="summary">A custom Suno song for Alexander's tennis journey. Pair it with a moment in the format that matters most — warm-up, transitions, or champion-moment celebration.</p>
+      <a class="play-button" href="https://suno.com/s/iU5NWIiQfEaJWwSn" target="_blank" rel="noopener"><span class="icon">▶</span> Play on Suno</a>
+      <p class="song-id">ID: iU5NWIiQfEaJWwSn</p>
+    </div>
+    <div class="card song-add">
+      <div class="card-icon">➕</div>
+      <h3>Add a New Song</h3>
+      <p class="summary" style="text-align:left">Make a new Suno song with Alexander whenever a moment deserves one.</p>
+      <ol>
+        <li>Alexander writes down what the song should be about. He picks the genre.</li>
+        <li>Make the song on Suno together.</li>
+        <li>Copy the share link from Suno.</li>
+        <li>Paste a new card here in the playlist.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h3 style="margin: 2rem 0 0.7rem">When to use the songs</h3>
+  <div class="song-uses">
+    <div class="song-use">
+      <h4>🎒 On the way to practice</h4>
+      <p>In the car. Builds anticipation. Lets the body get into "tennis mode" before arrival.</p>
+    </div>
+    <div class="song-use">
+      <h4>🤸 Warm-up block</h4>
+      <p>Play a song while doing menu moves. The song's length signals when warm-up is done.</p>
+    </div>
+    <div class="song-use">
+      <h4>💧 Between blocks</h4>
+      <p>A 30-second song clip resets attention before moving to the next part of the lesson.</p>
+    </div>
+    <div class="song-use">
+      <h4>🏆 Champion moment</h4>
+      <p>End every Format C lesson with a song. Pair the song with the win-feeling.</p>
+    </div>
+    <div class="song-use">
+      <h4>😮‍💨 Regulation</h4>
+      <p>If a moment feels hard, pause and listen to a familiar song. Then come back to the court.</p>
+    </div>
+    <div class="song-use">
+      <h4>🚗 Drive home</h4>
+      <p>Replay the song on the way home. Pairs the music with the memory of a good practice.</p>
+    </div>
+  </div>
+
+  <div class="pull-quote">
+    A song is a feeling you can put in your pocket. Tennis plus music plus rhythm plus joy — that is your game.
+  </div>
+
+  <p style="text-align:center; margin-top:2rem; font-family:'Fraunces',serif; font-style:italic; color:var(--ink-soft)">— Built with love for Alexander —</p>
+</section>
+
+
+</main>
+
+<!-- IN-APP VIDEO PLAYER OVERLAY -->
+<div id="video-overlay" role="dialog" aria-label="Video player">
+  <div id="video-overlay-bar">
+    <button id="video-overlay-back" type="button" aria-label="Go back to the playbook">
+      <span aria-hidden="true">←</span> Back to Playbook
+    </button>
+    <div id="video-overlay-title"></div>
+    <div style="width: 1px"></div>
+  </div>
+  <div id="video-overlay-frame-wrap">
+    <iframe id="video-overlay-frame" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</div>
+
+<!-- PWA INSTALL HINT (shows once, only on iPad/iPhone Safari, not in installed PWA) -->
+<div id="install-hint" style="display:none; position:fixed; bottom:1rem; left:1rem; right:1rem; background:var(--court-green-dark); color:var(--cream); padding:1rem 1.25rem; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,0.25); z-index:9999; font-size:0.95rem; max-width:520px; margin:0 auto;">
+  <div style="display:flex; align-items:flex-start; gap:0.75rem;">
+    <div style="flex:1;">
+      <strong style="font-family:'Fraunces',serif; font-size:1.1rem;">Install Alexander's Tennis</strong>
+      <p style="margin:0.4rem 0 0; line-height:1.4;">Tap <span style="display:inline-block; padding:0.1rem 0.4rem; background:rgba(255,255,255,0.18); border-radius:5px;">Share <span aria-hidden="true">⬆️</span></span> then <strong>"Add to Home Screen"</strong> for the full app experience.</p>
+    </div>
+    <button onclick="document.getElementById('install-hint').style.display='none'; localStorage.setItem('hideInstallHint','1')" style="background:transparent; color:var(--cream); border:1px solid rgba(255,255,255,0.4); border-radius:8px; padding:0.4rem 0.8rem; cursor:pointer; font-size:0.85rem; font-weight:600;">Got it</button>
+  </div>
+</div>
+
+<script>
+  // ============ TAB SWITCHING ============
+  const tabs = document.querySelectorAll('.tab-btn');
+  const panels = document.querySelectorAll('.panel');
+  tabs.forEach(t => {
+    t.addEventListener('click', () => {
+      tabs.forEach(x => x.classList.remove('active'));
+      panels.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      const id = t.dataset.tab;
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+    });
+  });
+
+  // ============ IN-APP VIDEO PLAYER ============
+  // Intercepts all video links and opens them in a contained overlay with a "Back" button
+  const overlay = document.getElementById('video-overlay');
+  const overlayFrame = document.getElementById('video-overlay-frame');
+  const overlayTitle = document.getElementById('video-overlay-title');
+  const overlayBack = document.getElementById('video-overlay-back');
+
+  function youtubeEmbedUrl(url) {
+    // Convert YouTube watch/short URLs to embed URLs that play inline
+    let videoId = null;
+    const watchMatch = url.match(/[?&]v=([A-Za-z0-9_-]+)/);
+    const shortMatch = url.match(/youtube\.com\/shorts\/([A-Za-z0-9_-]+)/);
+    const youtuMatch = url.match(/youtu\.be\/([A-Za-z0-9_-]+)/);
+    if (watchMatch) videoId = watchMatch[1];
+    else if (shortMatch) videoId = shortMatch[1];
+    else if (youtuMatch) videoId = youtuMatch[1];
+    if (!videoId) return null;
+    return `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;
+  }
+
+  function isVideoLink(a) {
+    if (!a || !a.href) return false;
+    const href = a.href;
+    return /youtube\.com|youtu\.be/.test(href) || a.classList.contains('wk-vid') || a.classList.contains('game-vid') || a.classList.contains('video-link');
+  }
+
+  function openVideo(url, title) {
+    const embed = youtubeEmbedUrl(url);
+    if (!embed) {
+      // Fallback for non-YouTube videos: open in new tab (rare in this app)
+      window.open(url, '_blank');
+      return;
+    }
+    overlayFrame.src = embed;
+    overlayTitle.textContent = title || 'Tennis video';
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideo() {
+    overlay.classList.remove('show');
+    overlayFrame.src = ''; // stop the video
+    document.body.style.overflow = '';
+  }
+
+  overlayBack.addEventListener('click', closeVideo);
+
+  // Close on escape key (for desktop/keyboard users)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('show')) {
+      closeVideo();
+    }
+  });
+
+  // Intercept all video link clicks
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('#video-overlay')) return; // ignore clicks inside overlay
+    // Skip Suno song links — those should still open externally
+    if (/suno\.com/.test(a.href)) return;
+    if (isVideoLink(a)) {
+      e.preventDefault();
+      const title = a.textContent.trim().replace(/^▶\s*/, '');
+      openVideo(a.href, title);
+    }
+  });
+
+  // ============ PWA INSTALL HINT ============
+  // Show install hint to iOS Safari users who haven't installed yet
+  function isiOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+  function isStandalone() {
+    return window.navigator.standalone === true || window.matchMedia('(display-mode: standalone)').matches;
+  }
+  if (isiOS() && !isStandalone() && !localStorage.getItem('hideInstallHint')) {
+    setTimeout(() => {
+      document.getElementById('install-hint').style.display = 'block';
+    }, 1500);
+  }
+
+  // ============ SERVICE WORKER (for offline use) ============
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch(() => {/* silent fail */});
+    });
+  }
+</script>
+</body>
+</html>
